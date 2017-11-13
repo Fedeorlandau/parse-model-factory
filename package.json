@@ -1,0 +1,30 @@
+{
+  "name": "parse-model-factory",
+  "version": "1.0.0",
+  "description": "A Model Factory for Parse-server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fedeorlandau/parse-model-factory.git"
+  },
+  "keywords": [
+    "parse",
+    "server",
+    "model",
+    "factory",
+    "masterkey"
+  ],
+  "author": "Federico Orlandau <federico.orlandau@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Fedeorlandau/parse-model-factory/issues"
+  },
+  "homepage": "https://github.com/Fedeorlandau/parse-model-factory#readme",
+  "dependencies": {
+    "parse": "^1.10.2",
+    "underscore": "^1.8.3"
+  }
+}
