@@ -1,6 +1,6 @@
 # Stop!
 
-Parse Model Factory helps you to compact your parse's models. **All the queries are using useMasterKey in true.**
+Parse Model Factory helps you to compact your parse models. **All the queries are using useMasterKey in true.**
 
 # Getting Started
 
