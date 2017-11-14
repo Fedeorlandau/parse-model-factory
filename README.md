@@ -1,3 +1,5 @@
+[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Downloads][downloads-image]][npm-url]
+
 # Stop!
 
 Parse Model Factory helps you to compact your parse models. **All the queries are using useMasterKey in true.**
@@ -58,3 +60,11 @@ MyModel._find(query, MyModel.defaultIncludes, 10)
 * `saveAll(objects)`
 * `destroy(object)`
 * `destroyAll(objects)`
+
+[downloads-image]: http://img.shields.io/npm/dm/validator.svg
+
+[npm-url]: https://npmjs.org/package/validator
+[npm-image]: http://img.shields.io/npm/v/validator.svg
+
+[travis-url]: https://travis-ci.org/chriso/validator.js
+[travis-image]: http://img.shields.io/travis/chriso/validator.js.svg
