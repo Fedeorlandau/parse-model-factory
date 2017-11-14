@@ -17,6 +17,7 @@ module.exports = {
     };
 
     Model._find = function(query, includes, limit = 5000) {
+      query.include(includes);
       query.limit(limit);
       return query.find(addMasterKey());
     };
