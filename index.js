@@ -1,6 +1,4 @@
 const _ = require('underscore');
-const Parse = require('parse/node');
-
 const addMasterKey = (options = {}) =>  _.extend({useMasterKey: true}, options);    
 
 module.exports = {

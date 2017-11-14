@@ -25,7 +25,7 @@ const modelProperties = {
 };
 
 const objectProperties = {
-    toStringCustom: () => {
+    toStringCustom: function() {
  	     const prop = this.get('prop');
  	     return `Your prop is ${prop}`;
     }
@@ -42,7 +42,7 @@ const query = MyModel._query();
 query.doesNotExist('property');
 
 MyModel._find(query, MyModel.defaultIncludes, 10)
-    .then(result => result.map(obj => obj.toStringCustom())
+    .then(result => result.map(obj => console.log(obj.toStringCustom())))
     .catch(error => console.log(error));
 ```
 
