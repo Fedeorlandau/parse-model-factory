@@ -4,7 +4,7 @@
   "description": "A Model Factory for Parse-server",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "true",
     "build": "babel src -d . --presets es2015 --plugins add-module-exports",
     "lint": "eslint src",
     "lint:fix": "eslint --fix src"    
