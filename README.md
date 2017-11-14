@@ -1,3 +1,5 @@
+# Parse Model Factory
+
 [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Downloads][downloads-image]][npm-url]
 
 # Stop!
@@ -61,10 +63,11 @@ MyModel._find(query, MyModel.defaultIncludes, 10)
 * `destroy(object)`
 * `destroyAll(objects)`
 
-[downloads-image]: http://img.shields.io/npm/dm/validator.svg
+[downloads-image]: https://img.shields.io/npm/dt/parse-model-factory.svg
 
-[npm-url]: https://npmjs.org/package/validator
-[npm-image]: http://img.shields.io/npm/v/validator.svg
+[npm-url]: https://npmjs.org/package/parse-model-factory
+[npm-image]: http://img.shields.io/npm/v/parse-model-factory.svg
 
-[travis-url]: https://travis-ci.org/chriso/validator.js
-[travis-image]: http://img.shields.io/travis/chriso/validator.js.svg
+[travis-url]: https://travis-ci.org/Fedeorlandau/parse-model-factory
+[travis-image]: https://travis-ci.org/Fedeorlandau/parse-model-factory.svg
+
