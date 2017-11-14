@@ -1,5 +1,8 @@
 const _ = require('underscore');
-const addMasterKey = (options = {}) =>  _.extend({useMasterKey: true}, options);    
+const addMasterKey = (options = {}) =>  _.extend({useMasterKey: true}, options);
+const setIncludes = (query, includes) => {
+    _.map(includes, (include) => query.include(include));
+};
 
 module.exports = {
   generate: (modelName, modelProperties = {}, objectProperties = {}) => {
@@ -14,19 +17,19 @@ module.exports = {
       return new Parse.Query(this);
     };
 
-    Model._find = function(query, includes, limit = 5000) {
-      query.include(includes);
+    Model._find = function(query, includes = [], limit = 5000) {
+      setIncludes(query, includes);
       query.limit(limit);
       return query.find(addMasterKey());
     };
 
-    Model._get = function (query, objectId, includes) {
-      query.include(includes);
+    Model._get = function (query, objectId, includes = []) {
+      setIncludes(query, includes); 
       return query.get(objectId, addMasterKey());
     };
 
-    Model._each = function(query, includes, callback) {
-      query.include(includes);
+    Model._each = function(query, includes = [], callback) {
+      setIncludes(query, includes);
       return query.each(callback, addMasterKey());
     };
 
@@ -34,8 +37,8 @@ module.exports = {
       return query.count(addMasterKey());
     };
 
-    Model._first = function(query, includes){
-      query.include(includes);
+    Model._first = function(query, includes = []){
+      setIncludes(query, includes);
       return query.first(addMasterKey());
     };
 
