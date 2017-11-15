@@ -10,7 +10,7 @@ You can have clean models with just a few lines of code:
 ```
 const ModelFactory = require('parse-model-factory');
 const MyModel = ModelFactory.generate('MyModel');
-MyModel.theQuerieYouHave1000times = function() {
+MyModel.theQueryYouHave1000times = function() {
     const query = this._query();
     // all of your logic
     return this._find(query, ['include1', 'include2'], 200);
