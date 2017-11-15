@@ -1,13 +1,13 @@
 {
   "name": "parse-model-factory",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "A Model Factory for Parse-server",
   "main": "index.js",
   "scripts": {
-    "test": "true",
+    "test": "mocha --require babel-core/register",
     "build": "babel src -d . --presets es2015 --plugins add-module-exports",
     "lint": "eslint src",
-    "lint:fix": "eslint --fix src"    
+    "lint:fix": "eslint --fix src test"
   },
   "repository": {
     "type": "git",
@@ -31,12 +31,17 @@
   "homepage": "https://github.com/Fedeorlandau/parse-model-factory#readme",
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "parse": "^1.10.2",
+    "babel-core": "^6.26.0",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-preset-es2015": "^6.24.0",
     "babel-preset-es2015-rollup": "^3.0.0",
     "eslint": "^4.0.0",
     "eslint-config-airbnb-base": "^11.2.0",
-    "eslint-plugin-import": "^2.3.0"
+    "eslint-plugin-import": "^2.3.0",
+    "express": "^4.16.2",
+    "mocha": "^4.0.1",
+    "mongo-in-memory": "0.0.5",
+    "parse-server": "^2.6.5",
+    "supertest": "^3.0.0"
   }
 }
