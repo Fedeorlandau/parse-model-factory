@@ -3,7 +3,7 @@
 [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Downloads][downloads-image]][npm-url]
 
 # Intro
-Parse Model Factory is an addon for [parse-server](https://www.npmjs.com/package/parse-server). It provides a lot of basic queries so you can centralize all of your queries in one place. 
+Parse Model Factory is an addon to [parse-server](https://www.npmjs.com/package/parse-server). It provides a lot of basic queries so you can centralize all of your queries in one place. 
 This addon is amazing when you don't want `query.find()` all over your project.
 You can have clean models with just a few lines of code:
 
