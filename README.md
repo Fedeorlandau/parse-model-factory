@@ -2,9 +2,29 @@
 
 [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Downloads][downloads-image]][npm-url]
 
+# Intro
+Parse Model Factory is an addon for [parse-server](https://www.npmjs.com/package/parse-server). It provides a lot of basic queries so you can centralize all of your queries in one place. 
+This addon is amazing when you don't want `query.find()` all over your project.
+You can have clean models with just a few lines of code:
+
+```
+const ModelFactory = require('parse-model-factory');
+const MyModel = ModelFactory.generate('MyModel');
+MyModel.theQueryYouHave1000times = function() {
+    const query = this._query();
+    // all of your logic
+    return this._find(query, ['include1', 'include2'], 200);
+}
+module.exports = MyModel;
+```
+
+As you can see, we get the query from the model factory and we call `_find` with our complex query, an array of includes  and the limit.
+
+No more `query.include().include().include()` :heart:
+
 # Stop!
 
-Parse Model Factory helps you to compact your **[parse](https://www.npmjs.com/package/parse-server)** models. **All the queries are using useMasterKey in true.**
+ **All the queries are using useMasterKey in true.**
 
 # Getting Started
 
@@ -53,11 +73,11 @@ MyModel._find(query, MyModel.defaultIncludes, 10)
 ## Methods index
 
 * `_query()`
-* `_find(query, includes, limit = 5000)`
-* `_get(query, objectId, includes`
-* `_each(query, includes, callback)`
+* `_find(query, includes = [], limit = 5000)`
+* `_get(query, objectId, includes = [])`
+* `_each(query, includes = [], callback)`
 * `_count(query)`
-* `_first(query, includes)`
+* `_first(query, includes = [])`
 * `save(object, params = null)`
 * `saveAll(objects)`
 * `destroy(object)`

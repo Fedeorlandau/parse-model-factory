@@ -32,19 +32,6 @@ module.exports = () => {
       serverURL: 'http://localhost:1337/parse',
     });
     app.use('/parse', api);
-    app.get('/save', async (req, res) => {
-      try {
-        const testObject = new TestObject();
-        testObject.set('prop', new Date());
-        if (await TestObject.save(testObject)) {
-          res.status(200).send();
-        } else {
-          throw new Error("Couldn't save object");
-        }
-      } catch (e) {
-        res.status(500).send(e.message);
-      }
-    });
 
     app.get('/find', async (req, res) => {
       try {
@@ -55,9 +42,112 @@ module.exports = () => {
           throw new Error("Couldn't find the objects");
         }
       } catch (e) {
-        res.status(500).send(e.message);
+        res.status(404).send(e.message);
       }
     });
+
+    app.get('/get', async (req, res) => {
+      try {
+        const testObjects = await TestObject._find(TestObject._query());
+        if (testObjects) {
+          if (await TestObject._get(TestObject._query(), testObjects[0].id)) {
+            res.status(200).send();
+          } else {
+            throw new Error("Couldn't get the object");
+          }
+        } else {
+          throw new Error("Couldn't find the objects");
+        }
+      } catch (e) {
+        res.status(404).send(e.message);
+      }
+    });
+
+    app.get('/count', async (req, res) => {
+      try {
+        const testObjects = await TestObject._count(TestObject._query());
+        if (testObjects) {
+          res.status(200).send();
+        } else {
+          throw new Error("Couldn't count the objects");
+        }
+      } catch (e) {
+        res.status(404).send(e.message);
+      }
+    });
+
+    app.get('/first', async (req, res) => {
+      try {
+        const testObjects = await TestObject._first(TestObject._query());
+        if (testObjects) {
+          res.status(200).send();
+        } else {
+          throw new Error("Couldn't get the first object");
+        }
+      } catch (e) {
+        res.status(404).send(e.message);
+      }
+    });
+
+    app.get('/save', async (req, res) => {
+      try {
+        const testObject = new TestObject();
+        testObject.set('prop', new Date());
+        if (await TestObject.save(testObject)) {
+          res.status(200).send();
+        } else {
+          throw new Error("Couldn't save object");
+        }
+      } catch (e) {
+        res.status(404).send(e.message);
+      }
+    });
+
+    app.get('/saveAll', async (req, res) => {
+      try {
+        const object1 = new TestObject();
+        object1.set('prop', new Date());
+        const object2 = new TestObject();
+        object2.set('prop', new Date());
+        const testObjects = await TestObject.saveAll([object1, object2]);
+        if (testObjects) {
+          res.status(200).send();
+        } else {
+          throw new Error("Couldn't save all the object");
+        }
+      } catch (e) {
+        res.status(404).send(e.message);
+      }
+    });
+
+    app.get('/destroy', async (req, res) => {
+      try {
+        const testObject = await TestObject._first(TestObject._query());
+        if (testObject) {
+          await TestObject.destroy(testObject);
+          res.status(200).send();
+        } else {
+          throw new Error("Couldn't destroy the object");
+        }
+      } catch (e) {
+        res.status(404).send(e.message);
+      }
+    });
+
+    app.get('/destroyAll', async (req, res) => {
+      try {
+        const testObjects = await TestObject._find(TestObject._query());
+        if (testObjects) {
+          await TestObject.destroyAll(testObjects);
+          res.status(200).send();
+        } else {
+          throw new Error("Couldn't destroy all the object");
+        }
+      } catch (e) {
+        res.status(404).send(e.message);
+      }
+    });
+
     return app.listen(1337);
   };
 
