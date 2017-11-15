@@ -1,4 +1,5 @@
 import request from 'supertest';
+import "babel-polyfill";
 
 const expressServer = require('./lib/index');
 
