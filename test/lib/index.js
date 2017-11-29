@@ -48,11 +48,12 @@ module.exports = () => {
 
     app.get('/get', async (req, res) => {
       try {
-        const testObjects = await TestObject._find(TestObject._query());
-        if (testObjects) {
-          const testObjects = await TestObject._get(TestObject._query(), testObjects[0].id);
-          const testRegularObjects = await TestObject._getRegular({}, TestObject._query(), testObjects[0].id);
-          if (testObjects && testRegularObjects && testRegularObjects.id != testObjects.id) {
+        const testObject = await TestObject._first(TestObject._query());
+        const testRegularObject = await TestObject._firstRegular({{},TestObject._query());
+        if (testObject && testRegularObject) {
+          const findTestObjects = await TestObject._get(TestObject._query(), testObject.id);
+          const findTestRegularObjects = await TestObject._getRegular({}, TestObject._query(), testRegularObject.id);
+          if (findTestObjects && findTestRegularObjects && findTestRegularObjects.id != findTestObjects.id) {
             res.status(200).send();
           } else {
             throw new Error("Couldn't get the object");
