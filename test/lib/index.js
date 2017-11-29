@@ -49,7 +49,7 @@ module.exports = () => {
     app.get('/get', async (req, res) => {
       try {
         const testObject = await TestObject._first(TestObject._query());
-        const testRegularObject = await TestObject._firstRegular({{},TestObject._query());
+        const testRegularObject = await TestObject._firstRegular({},TestObject._query());
         if (testObject && testRegularObject) {
           const findTestObjects = await TestObject._get(TestObject._query(), testObject.id);
           const findTestRegularObjects = await TestObject._getRegular({}, TestObject._query(), testRegularObject.id);
