@@ -106,7 +106,7 @@ module.exports = () => {
         const aclRegular = new Parse.ACL();
         aclRegular.setPublicReadAccess(true);
         aclRegular.setPublicWriteAccess(false);
-        testRegularObject.setACL(acl);
+        testRegularObject.setACL(aclRegular);
 
         const testObjects = await TestObject.save(testObject);
         const testRegularObjects = await TestObject.save(testRegularObject);
