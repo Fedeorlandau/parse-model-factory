@@ -52,7 +52,7 @@ module.exports = () => {
         if (testObjects) {
           const testObjects = await TestObject._get(TestObject._query(), testObjects[0].id);
           const testRegularObjects = await TestObject._getRegular({}, TestObject._query(), testObjects[0].id);
-          if (testObjects && testRegularObjects) {
+          if (testObjects && testRegularObjects && testRegularObjects.id != testObjects.id) {
             res.status(200).send();
           } else {
             throw new Error("Couldn't get the object");
@@ -69,7 +69,7 @@ module.exports = () => {
       try {
         const testObjects = await TestObject._count(TestObject._query());
         const testRegularObjects = await TestObject._countRegular({}, TestObject._query());
-        if (testObjects && testRegularObjects) {
+        if (testObjects && testRegularObjects && testRegularObjects.id != testObjects.id) {
           res.status(200).send();
         } else {
           throw new Error("Couldn't count the objects");
@@ -83,7 +83,7 @@ module.exports = () => {
       try {
         const testObjects = await TestObject._first(TestObject._query());
         const testRegularObjects = await TestObject._firstRegular({}, TestObject._query());
-        if (testObjects && testRegularObjects) {
+        if (testObjects && testRegularObjects && testRegularObjects.id != testObjects.id) {
           res.status(200).send();
         } else {
           throw new Error("Couldn't get the first object");
@@ -108,8 +108,8 @@ module.exports = () => {
         aclRegular.setPublicWriteAccess(false);
         testRegularObject.setACL(acl);
 
-        const testObjects = = await TestObject.save(testObject);
-        const testRegularObjects = = await TestObject.save(testRegularObject);
+        const testObjects = await TestObject.save(testObject);
+        const testRegularObjects = await TestObject.save(testRegularObject);
 
         if (testObjects && testRegularObjects && testRegularObjects.id != testObjects.id) {
           res.status(200).send();
