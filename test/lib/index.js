@@ -97,7 +97,21 @@ module.exports = () => {
       try {
         const testObject = new TestObject();
         testObject.set('prop', new Date());
-        if (await TestObject.save(testObject)) {
+        const acl = new Parse.ACL();
+        acl.setPublicReadAccess(false);
+        acl.setPublicWriteAccess(false);
+        testObject.setACL(acl);
+
+        const testRegularObject = new TestObject();
+        const aclRegular = new Parse.ACL();
+        aclRegular.setPublicReadAccess(true);
+        aclRegular.setPublicWriteAccess(false);
+        testRegularObject.setACL(acl);
+
+        const testObjects = = await TestObject.save(testObject);
+        const testRegularObjects = = await TestObject.save(testRegularObject);
+
+        if (testObjects && testRegularObjects && testRegularObjects.id != testObjects.id) {
           res.status(200).send();
         } else {
           throw new Error("Couldn't save object");
