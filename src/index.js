@@ -63,16 +63,16 @@ export default {
     // - const option = { sessionToken: req.user.getSessionToken() };
     Model._getRegular = function (option, query, objectId, includes = []) {
       setIncludes(query, includes);
-      return query.get(objectId, option);
+      return query.get(objectId, option || {});
     };
 
     Model._countRegular = function (option, query) {
-      return query.count(option);
+      return query.count(option || {});
     };
 
     Model._firstRegular = function (option, query, includes = []) {
       setIncludes(query, includes);
-      return query.first(option);
+      return query.first(option || {});
     };
 
     return Model;

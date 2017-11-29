@@ -50,7 +50,9 @@ module.exports = () => {
       try {
         const testObjects = await TestObject._find(TestObject._query());
         if (testObjects) {
-          if (await TestObject._get(TestObject._query(), testObjects[0].id)) {
+          const testObjects = await TestObject._get(TestObject._query(), testObjects[0].id);
+          const testRegularObjects = await TestObject._getRegular({}, TestObject._query(), testObjects[0].id);
+          if (testObjects && testRegularObjects) {
             res.status(200).send();
           } else {
             throw new Error("Couldn't get the object");
@@ -66,7 +68,8 @@ module.exports = () => {
     app.get('/count', async (req, res) => {
       try {
         const testObjects = await TestObject._count(TestObject._query());
-        if (testObjects) {
+        const testRegularObjects = await TestObject._countRegular({}, TestObject._query());
+        if (testObjects && testRegularObjects) {
           res.status(200).send();
         } else {
           throw new Error("Couldn't count the objects");
@@ -79,7 +82,8 @@ module.exports = () => {
     app.get('/first', async (req, res) => {
       try {
         const testObjects = await TestObject._first(TestObject._query());
-        if (testObjects) {
+        const testRegularObjects = await TestObject._firstRegular({}, TestObject._query());
+        if (testObjects && testRegularObjects) {
           res.status(200).send();
         } else {
           throw new Error("Couldn't get the first object");
