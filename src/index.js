@@ -1,3 +1,5 @@
+import ACL from './acl';
+
 const addMasterKey = (options = {}) => Object.assign({ useMasterKey: true }, options);
 const setIncludes = (query, includes) => {
   includes.map(include => query.include(include));
@@ -9,6 +11,19 @@ export default {
       {
         customFetch() {
           return this.fetch(addMasterKey());
+        },
+        saveMasterKey(params = null) {
+          return this.save(params, addMasterKey());
+        },
+        removeMasterKey() {
+          return this.destroy(addMasterKey());
+        },
+        setAcl(force = false, func, ...args) {
+          if (force || this.isNew()) {
+            const acl = new Parse.ACL();
+            ACL[func].call(acl, ...args);
+            this.setACL(acl);
+          }
         },
       })), modelProperties);
 

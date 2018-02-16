@@ -66,27 +66,56 @@ MyModel._find(query, MyModel.defaultIncludes, 10)
     .catch(error => console.log(error));
 ```
 
-## Methods index
+## Object Methods index
+* `object.customFetch()` -> Will fetch the object with the master key
+* `object.saveMasterKey()` -> Will save the object with the master key
+* `object.destroyMasterKey()` -> Will destroy the object with the master key
+* `object.setAcl(force = false, func, ...args)`
+  * force : if false will set the acl only when the object is new
+  * func ; method you want to set `public | private | read | write | user`
+ 
 
-* `_query()`
+
+```js
+const object = new TestObject();
+object.setAcl(false, 'public', true, false);
+// == setPublicReadAccess(true) && setPublicWriteAccess(false)
+
+object.setAcl(false, 'private', [user], [user]);
+// == setReadAccess(user) && setWriteAccess(user)
+
+object.setAcl(false, 'read', user1, user2, ...);
+// == setReadAccess(user1) && setReadAccess(user2) && setPublicWriteAccess(false)
+
+object.setAcl(false, 'write', user1, user2, ...);
+// == setWriteAccess(user1) && setWriteAccess(user2) && setPublicWriteAccess(false)
+
+object.setAcl(false, 'user', user);
+// == setReadAccess(user) && setWriteAccess(user)
+
+```
+
+## Queries Methods index
+
+* `Model._query()`
 
 
 ### Methods with master key
-* `_find(query, includes = [], limit = 5000, skip = 0)`
-* `_get(query, objectId, includes = [])`
-* `_each(query, includes = [], callback)`
-* `_count(query)`
-* `_first(query, includes = [])`
-* `save(object, params = null)`
-* `saveAll(objects)`
-* `destroy(object)`
-* `destroyAll(objects)`
+* `Model._find(query, includes = [], limit = 5000, skip = 0)`
+* `Model._get(query, objectId, includes = [])`
+* `Model._each(query, includes = [], callback)`
+* `Model._count(query)`
+* `Model._first(query, includes = [])`
+* `Model.save(object, params = null)`
+* `Model.saveAll(objects)`
+* `Model.destroy(object)`
+* `Model.destroyAll(objects)`
 
 ### Methods without master key
-* `_findRegular(query, includes = [], limit = 5000, skip = 0, option = {})`
-* `_getRegular(query, objectId, includes = [], option = {})`
-* `_countRegular(query, option = {})`
-* `_firstRegular(query, includes = [], option = {})`
+* `Model._findRegular(query, includes = [], limit = 5000, skip = 0, option = {})`
+* `Model._getRegular(query, objectId, includes = [], option = {})`
+* `Model._countRegular(query, option = {})`
+* `Model._firstRegular(query, includes = [], option = {})`
 
 
 ```js

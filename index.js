@@ -1,8 +1,17 @@
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _acl = require('./acl');
+
+var _acl2 = _interopRequireDefault(_acl);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 var addMasterKey = function addMasterKey() {
   var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   return Object.assign({ useMasterKey: true }, options);
@@ -21,6 +30,31 @@ exports.default = {
     var Model = Object.assign(Parse.Object.extend(modelName, Object.assign(objectProperties, {
       customFetch: function customFetch() {
         return this.fetch(addMasterKey());
+      },
+      saveMasterKey: function saveMasterKey() {
+        var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
+        return this.save(params, addMasterKey());
+      },
+      removeMasterKey: function removeMasterKey() {
+        return this.destroy(addMasterKey());
+      },
+      setAcl: function setAcl() {
+        var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+        var func = arguments[1];
+
+        if (force || this.isNew()) {
+          var _ACL$func;
+
+          var acl = new Parse.ACL();
+
+          for (var _len = arguments.length, args = Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
+            args[_key - 2] = arguments[_key];
+          }
+
+          (_ACL$func = _acl2.default[func]).call.apply(_ACL$func, [acl].concat(_toConsumableArray(args)));
+          this.setACL(acl);
+        }
       }
     })), modelProperties);
 
@@ -123,4 +157,4 @@ exports.default = {
     return Model;
   }
 };
-module.exports = exports["default"];
+module.exports = exports['default'];

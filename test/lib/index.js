@@ -111,17 +111,11 @@ module.exports = () => {
       try {
         const testObject = new TestObject();
         testObject.set('prop', new Date());
-        const acl = new Parse.ACL();
-        acl.setPublicReadAccess(false);
-        acl.setPublicWriteAccess(false);
-        testObject.setACL(acl);
+        testObject.setAcl(false, 'public', false, false);
 
         const testRegularObject = new TestObject();
         testRegularObject.set('prop', new Date());
-        const aclRegular = new Parse.ACL();
-        aclRegular.setPublicReadAccess(true);
-        aclRegular.setPublicWriteAccess(true);
-        testRegularObject.setACL(aclRegular);
+        testObject.setAcl(false, 'public', true, true);
 
         const testObjects = await TestObject.save(testObject);
         const testRegularObjects = await TestObject.save(testRegularObject);
