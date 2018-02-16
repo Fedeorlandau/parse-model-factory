@@ -89,7 +89,7 @@ object.setAcl(false, 'read', user1, user2, ...);
 // == setReadAccess(user1) && setReadAccess(user2) && setPublicWriteAccess(false)
 
 object.setAcl(false, 'write', user1, user2, ...);
-// == setWriteAccess(user1) && setWriteAccess(user2) && setPublicWriteAccess(false)
+// == setWriteAccess(user1) && setWriteAccess(user2) && setPublicReadAccess(true)
 
 object.setAcl(false, 'user', user);
 // == setReadAccess(user) && setWriteAccess(user)
