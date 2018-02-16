@@ -61,23 +61,23 @@ export default {
     // No Master Key
     // - working with session token
     // - const option = { sessionToken: req.user.getSessionToken() };
-    Model._findRegular = function (option, query, includes = [], limit = 5000, skip = 0) {
+    Model._findRegular = function (query, includes = [], limit = 5000, skip = 0, option = {}) {
       setIncludes(query, includes);
       query.limit(limit);
       query.skip(skip);
       return query.find(option || {});
     };
 
-    Model._getRegular = function (option, query, objectId, includes = []) {
+    Model._getRegular = function (query, objectId, includes = [], option = {}) {
       setIncludes(query, includes);
       return query.get(objectId, option || {});
     };
 
-    Model._countRegular = function (option, query) {
+    Model._countRegular = function (query, option = {}) {
       return query.count(option || {});
     };
 
-    Model._firstRegular = function (option, query, includes = []) {
+    Model._firstRegular = function (query, includes = [], option = {}) {
       setIncludes(query, includes);
       return query.first(option || {});
     };

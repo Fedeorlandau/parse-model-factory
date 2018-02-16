@@ -31,9 +31,11 @@ exports.default = {
     Model._find = function (query) {
       var includes = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
       var limit = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 5000;
+      var skip = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
 
       setIncludes(query, includes);
       query.limit(limit);
+      query.skip(skip);
       return query.find(addMasterKey());
     };
 
@@ -79,6 +81,43 @@ exports.default = {
 
     Model.destroyAll = function (objects) {
       return Parse.Object.destroyAll(objects, addMasterKey());
+    };
+
+    // No Master Key
+    // - working with session token
+    // - const option = { sessionToken: req.user.getSessionToken() };
+    Model._findRegular = function (query) {
+      var includes = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
+      var limit = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 5000;
+      var skip = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
+      var option = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : {};
+
+      setIncludes(query, includes);
+      query.limit(limit);
+      query.skip(skip);
+      return query.find(option || {});
+    };
+
+    Model._getRegular = function (query, objectId) {
+      var includes = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
+      var option = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
+
+      setIncludes(query, includes);
+      return query.get(objectId, option || {});
+    };
+
+    Model._countRegular = function (query) {
+      var option = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+      return query.count(option || {});
+    };
+
+    Model._firstRegular = function (query) {
+      var includes = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
+      var option = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+
+      setIncludes(query, includes);
+      return query.first(option || {});
     };
 
     return Model;

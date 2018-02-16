@@ -27,6 +27,7 @@ module.exports = () => {
       databaseURI: mongouri,
       appId: 'myAppId',
       masterKey: 'myMasterKey',
+      javascriptKey: 'javascriptKey',
       fileKey: 'optionalFileKey',
       restAPIKey: 'java',
       serverURL: 'http://localhost:1337/parse',
@@ -36,6 +37,7 @@ module.exports = () => {
     app.get('/find', async (req, res) => {
       try {
         const testObjects = await TestObject._find(TestObject._query());
+
         if (testObjects) {
           res.status(200).send();
         } else {
@@ -48,12 +50,18 @@ module.exports = () => {
 
     app.get('/get', async (req, res) => {
       try {
-        const testObject = await TestObject._first(TestObject._query());
-        const testRegularObject = await TestObject._firstRegular({},TestObject._query());
+        const query = TestObject._query();
+
+        const testObject = await TestObject._first(query);
+        const testRegularObject = await TestObject._firstRegular(query);
+
         if (testObject && testRegularObject) {
-          const findTestObjects = await TestObject._get(TestObject._query(), testObject.id);
-          const findTestRegularObjects = await TestObject._getRegular({}, TestObject._query(), testRegularObject.id);
-          if (findTestObjects && findTestRegularObjects && findTestRegularObjects.id != findTestObjects.id) {
+          const findTestObjects = await TestObject._get(query, testObject.id);
+          const findTestRegularObjects =
+            await TestObject._getRegular(query, testRegularObject.id);
+
+          if (findTestObjects && findTestRegularObjects
+            && findTestRegularObjects.id !== findTestObjects.id) {
             res.status(200).send();
           } else {
             throw new Error("Couldn't find different the object");
@@ -68,9 +76,12 @@ module.exports = () => {
 
     app.get('/count', async (req, res) => {
       try {
-        const testObjects = await TestObject._count(TestObject._query());
-        const testRegularObjects = await TestObject._countRegular({}, TestObject._query());
-        if (testObjects && testRegularObjects && testRegularObjects.id != testObjects.id) {
+        const query = TestObject._query();
+
+        const testObjects = await TestObject._count(query);
+        const testRegularObjects = await TestObject._countRegular(query);
+
+        if (testObjects > 0 && testRegularObjects > 0) {
           res.status(200).send();
         } else {
           throw new Error("Couldn't count the objects");
@@ -82,9 +93,11 @@ module.exports = () => {
 
     app.get('/first', async (req, res) => {
       try {
-        const testObjects = await TestObject._first(TestObject._query());
-        const testRegularObjects = await TestObject._firstRegular({}, TestObject._query());
-        if (testObjects && testRegularObjects && testRegularObjects.id != testObjects.id) {
+        const query = TestObject._query();
+
+        const testObjects = await TestObject._first(query);
+        const testRegularObjects = await TestObject._firstRegular(query);
+        if (testObjects && testRegularObjects && testRegularObjects.id !== testObjects.id) {
           res.status(200).send();
         } else {
           throw new Error("Couldn't get the first object");
@@ -113,7 +126,8 @@ module.exports = () => {
         const testObjects = await TestObject.save(testObject);
         const testRegularObjects = await TestObject.save(testRegularObject);
 
-        if (testObjects && testRegularObjects && testRegularObjects.id != testObjects.id) {
+
+        if (testObjects && testRegularObjects && testRegularObjects.id !== testObjects.id) {
           res.status(200).send();
         } else {
           throw new Error("Couldn't save object");

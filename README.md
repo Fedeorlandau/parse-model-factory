@@ -41,7 +41,7 @@ $ npm install parse-model-factory
 
 The only thing you should do is requiring the module and call the `generate` function
 
-```
+```js
 const ModelFactory = require('parse-model-factory');
 
 const modelProperties = {
@@ -61,7 +61,7 @@ const MyModel = ModelFactory.generate('MyModel', modelProperties, objectProperti
 
 Now you should be able to do:
 
-```
+```js
 const query = MyModel._query();
 query.doesNotExist('property');
 
@@ -73,7 +73,10 @@ MyModel._find(query, MyModel.defaultIncludes, 10)
 ## Methods index
 
 * `_query()`
-* `_find(query, includes = [], limit = 5000)`
+
+
+### Methods with master key
+* `_find(query, includes = [], limit = 5000, skip = 0)`
 * `_get(query, objectId, includes = [])`
 * `_each(query, includes = [], callback)`
 * `_count(query)`
@@ -82,6 +85,23 @@ MyModel._find(query, MyModel.defaultIncludes, 10)
 * `saveAll(objects)`
 * `destroy(object)`
 * `destroyAll(objects)`
+
+### Methods without master key
+* `_findRegular(query, includes = [], limit = 5000, skip = 0, option = {})`
+* `_getRegular(query, objectId, includes = [], option = {})`
+* `_countRegular(query, option = {})`
+* `_firstRegular(query, includes = [], option = {})`
+
+
+```js
+const query = MyModel._query();
+query.doesNotExist('property');
+
+const session = { sessionToken: req.user.getSessionToken() };
+
+const = await MyModel._findRegular(query, MyModel.defaultIncludes, 10, 10, session);
+
+```
 
 [downloads-image]: https://img.shields.io/npm/dt/parse-model-factory.svg
 
