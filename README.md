@@ -72,7 +72,8 @@ MyModel._find(query, MyModel.defaultIncludes, 10)
 * `object.destroyMasterKey()` -> Will destroy the object with the master key
 * `object.setAcl(force = false, func, ...args)`
   * force : if false will set the acl only when the object is new
-  * func ; method you want to set `public | private | read | write | user`
+  * func : method you want to set `public | private | read | write | user`
+
  
 
 
