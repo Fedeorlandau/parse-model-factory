@@ -115,7 +115,7 @@ module.exports = () => {
 
         const testRegularObject = new TestObject();
         testRegularObject.set('prop', new Date());
-        testObject.setAcl(false, 'public', true, true);
+        testRegularObject.setAcl(false, 'public', true, true);
 
         const testObjects = await TestObject.save(testObject);
         const testRegularObjects = await TestObject.save(testRegularObject);
