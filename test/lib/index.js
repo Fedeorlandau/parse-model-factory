@@ -56,7 +56,7 @@ module.exports = () => {
           if (findTestObjects && findTestRegularObjects && findTestRegularObjects.id != findTestObjects.id) {
             res.status(200).send();
           } else {
-            throw new Error("Couldn't get the object");
+            throw new Error("Couldn't find different the object");
           }
         } else {
           throw new Error("Couldn't find the objects");
@@ -104,9 +104,10 @@ module.exports = () => {
         testObject.setACL(acl);
 
         const testRegularObject = new TestObject();
+        testRegularObject.set('prop', new Date());
         const aclRegular = new Parse.ACL();
         aclRegular.setPublicReadAccess(true);
-        aclRegular.setPublicWriteAccess(false);
+        aclRegular.setPublicWriteAccess(true);
         testRegularObject.setACL(aclRegular);
 
         const testObjects = await TestObject.save(testObject);
