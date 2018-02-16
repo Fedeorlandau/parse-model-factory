@@ -3,11 +3,11 @@
 [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Downloads][downloads-image]][npm-url]
 
 # Intro
-Parse Model Factory is an addon to [parse-server](https://www.npmjs.com/package/parse-server). It provides a lot of basic queries so you can centralize all of your queries in one place. 
+Parse Model Factory is an addon to [parse-server](https://www.npmjs.com/package/parse-server). It provides a lot of basic queries so you can centralize all of your queries in one place.
 This addon is amazing when you don't want `query.find()` all over your project.
 You can have clean models with just a few lines of code:
 
-```
+```js
 const ModelFactory = require('parse-model-factory');
 const MyModel = ModelFactory.generate('MyModel');
 MyModel.theQueryYouHave1000times = function() {
@@ -99,7 +99,7 @@ query.doesNotExist('property');
 
 const session = { sessionToken: req.user.getSessionToken() };
 
-const = await MyModel._findRegular(query, MyModel.defaultIncludes, 10, 10, session);
+const result = await MyModel._findRegular(query, MyModel.defaultIncludes, 10, 10, session);
 
 ```
 
@@ -110,4 +110,3 @@ const = await MyModel._findRegular(query, MyModel.defaultIncludes, 10, 10, sessi
 
 [travis-url]: https://travis-ci.org/Fedeorlandau/parse-model-factory
 [travis-image]: https://travis-ci.org/Fedeorlandau/parse-model-factory.svg
-
