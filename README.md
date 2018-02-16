@@ -22,10 +22,6 @@ As you can see, we get the query from the model factory and we call `_find` with
 
 No more `query.include().include().include()` :heart:
 
-# Stop!
-
- **All the queries are using useMasterKey in true.**
-
 # Getting Started
 
 
