@@ -1,6 +1,6 @@
 {
   "name": "parse-model-factory",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "A Model Factory for Parse-server",
   "main": "index.js",
   "scripts": {
@@ -18,7 +18,12 @@
     "server",
     "model",
     "factory",
-    "masterkey"
+    "masterkey",
+    "parse-server",
+    "parse model",
+    "parse plugin",
+    "plugin",
+    "parse query"
   ],
   "author": "Federico Orlandau <federico.orlandau@gmail.com>",
   "license": "MIT",
